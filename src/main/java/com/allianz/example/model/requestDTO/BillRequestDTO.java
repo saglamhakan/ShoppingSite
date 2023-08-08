@@ -1,6 +1,7 @@
 package com.allianz.example.model.requestDTO;
 
 import com.allianz.example.database.entity.OrderEntity;
+import com.allianz.example.model.OrderDTO;
 import com.allianz.example.util.BaseDTO;
 import lombok.Data;
 
@@ -22,5 +23,5 @@ public class BillRequestDTO extends BaseDTO {
 
     private BigDecimal totalSellPrice;
 
-    private OrderEntity order;
+    private OrderDTO order;
 }

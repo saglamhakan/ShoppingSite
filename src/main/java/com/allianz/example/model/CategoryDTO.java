@@ -12,6 +12,6 @@ public class CategoryDTO extends BaseDTO {
 
     private String name;
 
-    private Set<ProductEntity> productList = new HashSet<>();
+    private Set<ProductDTO> productList = new HashSet<>();
 
 }

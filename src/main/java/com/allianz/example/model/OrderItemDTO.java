@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Data
 public class OrderItemDTO extends BaseDTO {
 
-    private ProductEntity product;
+    private ProductDTO product;
 
     private Integer quantity;
 

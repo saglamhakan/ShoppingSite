@@ -4,13 +4,20 @@ import com.allianz.example.database.entity.OrderEntity;
 import com.allianz.example.model.OrderDTO;
 import com.allianz.example.model.requestDTO.OrderRequestDTO;
 import com.allianz.example.util.IBaseMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class OrderMapper implements IBaseMapper<OrderDTO, OrderEntity, OrderRequestDTO> {
+    @Autowired
+    OrderItemMapper orderItemMapper;
+    @Autowired
+    CustomerMapper customerMapper;
     @Override
     public OrderDTO entityToDTO(OrderEntity entity) {
         OrderDTO orderDTO = new OrderDTO();
@@ -20,8 +27,8 @@ public class OrderMapper implements IBaseMapper<OrderDTO, OrderEntity, OrderRequ
         orderDTO.setCreationDate(entity.getCreationDate());
         orderDTO.setUpdatedDate(entity.getUpdatedDate());
         orderDTO.setOrderStatus(entity.getOrderStatus());
-        orderDTO.setOrderItemList(entity.getOrderItemList());
-        orderDTO.setCustomer(entity.getCustomer());
+        orderDTO.setOrderItemList(orderItemMapper.entityListToDTOList(entity.getOrderItemList()));
+        orderDTO.setCustomer(customerMapper.entityToDTO(entity.getCustomer()));
         orderDTO.setTotalSellPrice(entity.getTotalSellPrice());
         return orderDTO;
     }
@@ -35,8 +42,8 @@ public class OrderMapper implements IBaseMapper<OrderDTO, OrderEntity, OrderRequ
         entity.setCreationDate(dto.getCreationDate());
         entity.setUpdatedDate(dto.getUpdatedDate());
         entity.setOrderStatus(dto.getOrderStatus());
-        entity.setOrderItemList(dto.getOrderItemList());
-        entity.setCustomer(dto.getCustomer());
+        entity.setOrderItemList(orderItemMapper.dtoListTOEntityList(dto.getOrderItemList()));
+        entity.setCustomer(customerMapper.dtoToEntity(dto.getCustomer()));
         entity.setTotalSellPrice(dto.getTotalSellPrice());
 
         return entity;
@@ -73,9 +80,10 @@ public class OrderMapper implements IBaseMapper<OrderDTO, OrderEntity, OrderRequ
         entity.setCreationDate(dto.getCreationDate());
         entity.setUpdatedDate(dto.getUpdatedDate());
         entity.setOrderStatus(dto.getOrderStatus());
-        entity.setOrderItemList(dto.getOrderItemList());
-        entity.setCustomer(dto.getCustomer());
+        entity.setOrderItemList(orderItemMapper.dtoListTOEntityList(dto.getOrderItemList()));
+        entity.setCustomer(customerMapper.dtoToEntity(dto.getCustomer()));
         entity.setTotalSellPrice(dto.getTotalSellPrice());
+
 
         return entity;
     }
@@ -87,10 +95,12 @@ public class OrderMapper implements IBaseMapper<OrderDTO, OrderEntity, OrderRequ
         entity.setCreationDate(dto.getCreationDate());
         entity.setUpdatedDate(dto.getUpdatedDate());
         entity.setOrderStatus(dto.getOrderStatus());
-        entity.setOrderItemList(dto.getOrderItemList());
-        entity.setCustomer(dto.getCustomer());
+        entity.setOrderItemList(orderItemMapper.dtoListTOEntityList(dto.getOrderItemList()));
+        entity.setCustomer(customerMapper.dtoToEntity(dto.getCustomer()));
         entity.setTotalSellPrice(dto.getTotalSellPrice());
 
         return entity;
     }
+
+
 }

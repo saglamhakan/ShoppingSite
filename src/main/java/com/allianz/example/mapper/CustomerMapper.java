@@ -1,16 +1,25 @@
 package com.allianz.example.mapper;
 
 import com.allianz.example.database.entity.CustomerEntity;
+import com.allianz.example.database.entity.OrderEntity;
 import com.allianz.example.model.CustomerDTO;
+import com.allianz.example.model.OrderDTO;
 import com.allianz.example.model.requestDTO.CustomerRequestDTO;
 import com.allianz.example.util.IBaseMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class CustomerMapper implements IBaseMapper<CustomerDTO, CustomerEntity, CustomerRequestDTO> {
+
+    @Autowired
+    OrderMapper orderMapper;
+
+
     @Override
     public CustomerDTO entityToDTO(CustomerEntity entity) {
         CustomerDTO customerDTO = new CustomerDTO();
@@ -21,9 +30,9 @@ public class CustomerMapper implements IBaseMapper<CustomerDTO, CustomerEntity, 
         customerDTO.setUpdatedDate(entity.getUpdatedDate());
         customerDTO.setIsCorporate(entity.getIsCorporate());
         customerDTO.setCompanyName(entity.getCompanyName());
-        customerDTO.setOrderList(entity.getOrderList());
         customerDTO.setTaxNumber(entity.getTaxNumber());
         customerDTO.setTaxOffice(entity.getTaxNumber());
+        customerDTO.setOrderList(orderMapper.entityListToDTOList(entity.getOrderList()));
 
         return customerDTO;
     }
@@ -39,9 +48,9 @@ public class CustomerMapper implements IBaseMapper<CustomerDTO, CustomerEntity, 
         entity.setUpdatedDate(dto.getUpdatedDate());
         entity.setIsCorporate(dto.getIsCorporate());
         entity.setCompanyName(dto.getCompanyName());
-        entity.setOrderList(dto.getOrderList());
         entity.setTaxNumber(dto.getTaxNumber());
         entity.setTaxOffice(dto.getTaxNumber());
+        entity.setOrderList(orderMapper.dtoListTOEntityList(dto.getOrderList()));
         return entity;
     }
 
@@ -78,9 +87,10 @@ public class CustomerMapper implements IBaseMapper<CustomerDTO, CustomerEntity, 
         entity.setUpdatedDate(dto.getUpdatedDate());
         entity.setIsCorporate(dto.getIsCorporate());
         entity.setCompanyName(dto.getCompanyName());
-        entity.setOrderList(dto.getOrderList());
         entity.setTaxNumber(dto.getTaxNumber());
         entity.setTaxOffice(dto.getTaxNumber());
+        entity.setOrderList(orderMapper.dtoListTOEntityList(dto.getOrderList()));
+
 
         return entity;
     }
@@ -94,9 +104,10 @@ public class CustomerMapper implements IBaseMapper<CustomerDTO, CustomerEntity, 
         entity.setUpdatedDate(dto.getUpdatedDate());
         entity.setIsCorporate(dto.getIsCorporate());
         entity.setCompanyName(dto.getCompanyName());
-        entity.setOrderList(dto.getOrderList());
         entity.setTaxNumber(dto.getTaxNumber());
         entity.setTaxOffice(dto.getTaxNumber());
+        entity.setOrderList(orderMapper.dtoListTOEntityList(dto.getOrderList()));
+
 
         return entity;
     }

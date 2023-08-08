@@ -22,5 +22,5 @@ public class BillDTO extends BaseDTO {
 
     private BigDecimal totalSellPrice;
 
-    private OrderEntity order;
+    private OrderDTO order;
 }

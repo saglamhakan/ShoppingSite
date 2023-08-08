@@ -5,13 +5,23 @@ import com.allianz.example.model.ProductDTO;
 import com.allianz.example.model.requestDTO.PersonRequestDTO;
 import com.allianz.example.model.requestDTO.ProductRequestDTO;
 import com.allianz.example.util.IBaseMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class ProductMapper implements IBaseMapper<ProductDTO, ProductEntity, ProductRequestDTO> {
+
+    @Autowired
+    TaxMapper taxMapper;
+
+    @Autowired
+    CategoryMapper categoryMapper;
+
     @Override
     public ProductDTO entityToDTO(ProductEntity entity) {
         ProductDTO productDTO = new ProductDTO();
@@ -23,11 +33,10 @@ public class ProductMapper implements IBaseMapper<ProductDTO, ProductEntity, Pro
         productDTO.setColor(entity.getColor());
         productDTO.setCreationDate(entity.getCreationDate());
         productDTO.setUpdatedDate(entity.getUpdatedDate());
-        productDTO.setTax(entity.getTax());
+        productDTO.setTax(taxMapper.entityToDTO(entity.getTax()));
         productDTO.setQuantity(entity.getQuantity());
         productDTO.setBuyPrice(entity.getBuyPrice());
         productDTO.setSellPrice(entity.getSellPrice());
-        productDTO.setCategoryList(entity.getCategoryList());
 
         return productDTO;
     }
@@ -43,11 +52,10 @@ public class ProductMapper implements IBaseMapper<ProductDTO, ProductEntity, Pro
         entity.setColor(dto.getColor());
         entity.setCreationDate(dto.getCreationDate());
         entity.setUpdatedDate(dto.getUpdatedDate());
-        entity.setTax(dto.getTax());
+        entity.setTax(taxMapper.dtoToEntity(dto.getTax()));
         entity.setQuantity(dto.getQuantity());
         entity.setBuyPrice(dto.getBuyPrice());
         entity.setSellPrice(dto.getSellPrice());
-        entity.setCategoryList(dto.getCategoryList());
 
         return entity;
     }
@@ -111,5 +119,17 @@ public class ProductMapper implements IBaseMapper<ProductDTO, ProductEntity, Pro
         entity.setCategoryList(dto.getCategoryList());
 
         return entity;
+    }
+
+    public Set<ProductDTO> entitiesToDTOs(Set<ProductEntity> entities) {
+        return entities.stream()
+                .map(this::entityToDTO)
+                .collect(Collectors.toSet());
+    }
+
+    public Set<ProductEntity> dtosToEntities(Set<ProductDTO> dtos) {
+        return dtos.stream()
+                .map(this::dtoToEntity)
+                .collect(Collectors.toSet());
     }
 }

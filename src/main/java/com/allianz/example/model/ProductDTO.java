@@ -24,7 +24,7 @@ public class ProductDTO extends BaseDTO {
 
     private Integer quantity;
 
-    private Set<CategoryEntity> categoryList;
+    private Set<CategoryDTO> categoryList;
 
-    private TaxEntity tax;
+    private TaxDTO tax;
 }

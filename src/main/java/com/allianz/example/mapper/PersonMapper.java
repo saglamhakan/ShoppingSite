@@ -6,12 +6,15 @@ import com.allianz.example.model.requestDTO.PersonRequestDTO;
 import com.allianz.example.util.BaseDTO;
 import com.allianz.example.util.IBaseMapper;
 import com.allianz.example.util.dbutil.BaseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PersonMapper implements IBaseMapper<PersonDTO, PersonEntity, PersonRequestDTO> {
 
+    @Autowired
+    AddressMapper addressMapper;
 
     @Override
     public PersonDTO entityToDTO(PersonEntity entity) {
@@ -24,6 +27,7 @@ public class PersonMapper implements IBaseMapper<PersonDTO, PersonEntity, Person
         personDTO.setBirthYear(entity.getBirthYear());
         personDTO.setCreationDate(entity.getCreationDate());
         personDTO.setUpdatedDate(entity.getUpdatedDate());
+        personDTO.setAddressList(addressMapper.entityListToDTOList(entity.getAddressEntityList()));
 
         return personDTO;
     }
@@ -39,6 +43,7 @@ public class PersonMapper implements IBaseMapper<PersonDTO, PersonEntity, Person
         personEntity.setCreationDate(dto.getCreationDate());
         personEntity.setUpdatedDate(dto.getUpdatedDate());
         personEntity.setBirthYear(dto.getBirthYear());
+        personEntity.setAddressEntityList(addressMapper.dtoListTOEntityList(dto.getAddressList()));
 
         return personEntity;
     }

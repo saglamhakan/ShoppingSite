@@ -5,6 +5,7 @@ import com.allianz.example.model.OrderItemDTO;
 import com.allianz.example.model.requestDTO.OrderItemRequestDTO;
 import com.allianz.example.util.IBaseMapper;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -12,6 +13,9 @@ import java.util.List;
 
 @Component
 public class OrderItemMapper implements IBaseMapper<OrderItemDTO, OrderItemEntity, OrderItemRequestDTO> {
+
+    @Autowired
+    ProductMapper productMapper;
     @Override
     public OrderItemDTO entityToDTO(OrderItemEntity entity) {
         OrderItemDTO orderItemDTO = new OrderItemDTO();
@@ -19,7 +23,7 @@ public class OrderItemMapper implements IBaseMapper<OrderItemDTO, OrderItemEntit
         orderItemDTO.setUuid(entity.getUuid());
         orderItemDTO.setCreationDate(entity.getCreationDate());
         orderItemDTO.setUpdatedDate(entity.getUpdatedDate());
-        orderItemDTO.setProduct(entity.getProduct());
+        orderItemDTO.setProduct(productMapper.entityToDTO(entity.getProduct()));
         orderItemDTO.setQuantity(entity.getQuantity());
         orderItemDTO.setSellPrice(entity.getSellPrice());
 
@@ -33,7 +37,7 @@ public class OrderItemMapper implements IBaseMapper<OrderItemDTO, OrderItemEntit
         entity.setUuid(dto.getUuid());
         entity.setCreationDate(dto.getCreationDate());
         entity.setUpdatedDate(dto.getUpdatedDate());
-        entity.setProduct(dto.getProduct());
+        entity.setProduct(productMapper.dtoToEntity(dto.getProduct()));
         entity.setQuantity(dto.getQuantity());
         entity.setSellPrice(dto.getSellPrice());
 
@@ -69,7 +73,7 @@ public class OrderItemMapper implements IBaseMapper<OrderItemDTO, OrderItemEntit
         entity.setUuid(dto.getUuid());
         entity.setCreationDate(dto.getCreationDate());
         entity.setUpdatedDate(dto.getUpdatedDate());
-        entity.setProduct(dto.getProduct());
+        entity.setProduct(productMapper.dtoToEntity(dto.getProduct()));
         entity.setQuantity(dto.getQuantity());
         entity.setSellPrice(dto.getSellPrice());
 
@@ -81,7 +85,7 @@ public class OrderItemMapper implements IBaseMapper<OrderItemDTO, OrderItemEntit
         entity.setUuid(dto.getUuid());
         entity.setCreationDate(dto.getCreationDate());
         entity.setUpdatedDate(dto.getUpdatedDate());
-        entity.setProduct(dto.getProduct());
+        entity.setProduct(productMapper.dtoToEntity(dto.getProduct()));
         entity.setQuantity(dto.getQuantity());
         entity.setSellPrice(dto.getSellPrice());
 

@@ -6,6 +6,7 @@ import com.allianz.example.util.BaseDTO;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 public class CustomerDTO extends BaseDTO {
@@ -20,5 +21,5 @@ public class CustomerDTO extends BaseDTO {
 
     private String taxOffice;
 
-    private List<OrderEntity> orderList;
+    private List<OrderDTO> orderList;
 }
