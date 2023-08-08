@@ -1,5 +1,5 @@
 package com.allianz.example.model.enums;
 
-public enum OrderStatus {
+public enum OrderStatusEnum {
     WAITING, APPROVED, CANCELED, IN_SHIPPING, DELIVERED;
 }

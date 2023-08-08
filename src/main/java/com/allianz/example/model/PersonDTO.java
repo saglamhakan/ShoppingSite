@@ -1,22 +1,23 @@
 package com.allianz.example.model;
 
+import com.allianz.example.util.BaseDTO;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
-import java.util.UUID;
+import java.util.List;
 
-@Getter
-@Setter
-public class Person {
-    private UUID uuid;
+@Data
+public class PersonDTO extends BaseDTO {
+
     private String name;
     private String surname;
     private int birthYear;
     private String tc;
+    private List<AddressDTO> addressList;
 
 
-    public Person() {
-        this.uuid = UUID.randomUUID();
-    }
+
+
+
 }
+
+
