@@ -1,6 +1,5 @@
 package com.allianz.example.model;
 
-import com.allianz.example.database.entity.OrderEntity;
 import com.allianz.example.util.BaseDTO;
 import lombok.Data;
 

@@ -80,13 +80,10 @@ public class TaxMapper implements IBaseMapper<TaxDTO, TaxEntity, TaxRequestDTO> 
 
     public TaxEntity updateEntityFromRequestDTO(TaxEntity entity, TaxRequestDTO dto) {
 
-        entity.setId(dto.getId());
-        entity.setUuid(dto.getUuid());
         entity.setName(dto.getName());
         entity.setRate(dto.getRate());
         entity.setCode(dto.getCode());
-        entity.setCreationDate(dto.getCreationDate());
-        entity.setUpdatedDate(dto.getUpdatedDate());
+
 
         return entity;
     }

@@ -11,7 +11,7 @@ import java.util.Set;
 @Data
 public class CustomerDTO extends BaseDTO {
 
-    private PersonEntity person;
+    private PersonDTO person;
 
     private Boolean isCorporate;
 

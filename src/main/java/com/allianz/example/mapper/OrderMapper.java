@@ -5,6 +5,7 @@ import com.allianz.example.model.OrderDTO;
 import com.allianz.example.model.requestDTO.OrderRequestDTO;
 import com.allianz.example.util.IBaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -15,8 +16,10 @@ import java.util.stream.Collectors;
 @Component
 public class OrderMapper implements IBaseMapper<OrderDTO, OrderEntity, OrderRequestDTO> {
     @Autowired
+    @Lazy
     OrderItemMapper orderItemMapper;
     @Autowired
+    @Lazy
     CustomerMapper customerMapper;
     @Override
     public OrderDTO entityToDTO(OrderEntity entity) {
@@ -90,10 +93,7 @@ public class OrderMapper implements IBaseMapper<OrderDTO, OrderEntity, OrderRequ
 
     public OrderEntity updateEntityFromRequestDTO(OrderEntity entity, OrderRequestDTO dto) {
 
-        entity.setId(dto.getId());
-        entity.setUuid(dto.getUuid());
-        entity.setCreationDate(dto.getCreationDate());
-        entity.setUpdatedDate(dto.getUpdatedDate());
+
         entity.setOrderStatus(dto.getOrderStatus());
         entity.setOrderItemList(orderItemMapper.dtoListTOEntityList(dto.getOrderItemList()));
         entity.setCustomer(customerMapper.dtoToEntity(dto.getCustomer()));
@@ -101,6 +101,7 @@ public class OrderMapper implements IBaseMapper<OrderDTO, OrderEntity, OrderRequ
 
         return entity;
     }
+
 
 
 }

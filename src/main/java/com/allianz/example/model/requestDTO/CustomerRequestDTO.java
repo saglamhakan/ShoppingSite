@@ -3,6 +3,7 @@ package com.allianz.example.model.requestDTO;
 import com.allianz.example.database.entity.OrderEntity;
 import com.allianz.example.database.entity.PersonEntity;
 import com.allianz.example.model.OrderDTO;
+import com.allianz.example.model.PersonDTO;
 import com.allianz.example.util.BaseDTO;
 import lombok.Data;
 
@@ -12,7 +13,7 @@ import java.util.Set;
 @Data
 public class CustomerRequestDTO extends BaseDTO {
 
-    private PersonEntity person;
+    private PersonDTO person;
 
     private Boolean isCorporate;
 

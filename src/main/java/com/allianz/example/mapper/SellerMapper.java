@@ -91,13 +91,10 @@ public class SellerMapper implements IBaseMapper<SellerDTO, SellerEntity, Seller
 
     public SellerEntity updateEntityFromRequestDTO(SellerEntity entity,SellerRequestDTO dto) {
 
-        entity.setId(dto.getId());
-        entity.setUuid(dto.getUuid());
         entity.setName(dto.getName());
         entity.setSurname(dto.getSurname());
         entity.setEmail(dto.getEmail());
         entity.setTc(dto.getTc());
-        entity.setCreationDate(dto.getCreationDate());
         entity.setUpdatedDate(dto.getCreationDate());
         entity.setShopName(dto.getShopName());
         entity.setTaxNumber(dto.getTaxNumber());

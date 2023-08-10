@@ -78,10 +78,6 @@ public class SettingsMapper implements IBaseMapper<SettingsDTO, Settings, Settin
 
     public Settings updateEntityFromRequestDTO(Settings settings, SettingsRequestDTO dto) {
 
-        settings.setId(dto.getId());
-        settings.setUuid(dto.getUuid());
-        settings.setCreationDate(dto.getCreationDate());
-        settings.setUpdatedDate(dto.getUpdatedDate());
         settings.setKey(dto.getKey());
         settings.setValue(dto.getValue());
 

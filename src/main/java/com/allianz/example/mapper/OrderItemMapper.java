@@ -6,6 +6,7 @@ import com.allianz.example.model.requestDTO.OrderItemRequestDTO;
 import com.allianz.example.util.IBaseMapper;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 public class OrderItemMapper implements IBaseMapper<OrderItemDTO, OrderItemEntity, OrderItemRequestDTO> {
 
     @Autowired
+    @Lazy
     ProductMapper productMapper;
     @Override
     public OrderItemDTO entityToDTO(OrderItemEntity entity) {
@@ -81,10 +83,7 @@ public class OrderItemMapper implements IBaseMapper<OrderItemDTO, OrderItemEntit
     }
 
     public OrderItemEntity updateEntityFromRequestDTO(OrderItemEntity entity,OrderItemRequestDTO dto) {
-        entity.setId(dto.getId());
-        entity.setUuid(dto.getUuid());
-        entity.setCreationDate(dto.getCreationDate());
-        entity.setUpdatedDate(dto.getUpdatedDate());
+
         entity.setProduct(productMapper.dtoToEntity(dto.getProduct()));
         entity.setQuantity(dto.getQuantity());
         entity.setSellPrice(dto.getSellPrice());

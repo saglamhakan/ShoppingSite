@@ -7,6 +7,7 @@ import com.allianz.example.model.OrderDTO;
 import com.allianz.example.model.requestDTO.BillRequestDTO;
 import com.allianz.example.util.IBaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.List;
 public class BillMapper implements IBaseMapper<BillDTO, BillEntity, BillRequestDTO> {
 
     @Autowired
+    @Lazy
     OrderMapper orderMapper;
 
     @Override
@@ -59,7 +61,7 @@ public class BillMapper implements IBaseMapper<BillDTO, BillEntity, BillRequestD
     public List<BillDTO> entityListToDTOList(List<BillEntity> billEntities) {
         List<BillDTO> billDTOList = new ArrayList<>();
 
-        for (BillEntity billEntity : billEntities ){
+        for (BillEntity billEntity : billEntities) {
             billDTOList.add(entityToDTO(billEntity));
         }
 
@@ -70,7 +72,7 @@ public class BillMapper implements IBaseMapper<BillDTO, BillEntity, BillRequestD
     public List<BillEntity> dtoListTOEntityList(List<BillDTO> billDTOS) {
         List<BillEntity> billEntityList = new ArrayList<>();
 
-        for (BillDTO billDTO : billDTOS){
+        for (BillDTO billDTO : billDTOS) {
             billEntityList.add(dtoToEntity(billDTO));
         }
 
@@ -96,10 +98,7 @@ public class BillMapper implements IBaseMapper<BillDTO, BillEntity, BillRequestD
     }
 
     public BillEntity updateEntityFromRequestDTO(BillEntity entity, BillRequestDTO dto) {
-        entity.setUuid(dto.getUuid());
         entity.setBillNo(dto.getBillNo());
-        entity.setCreationDate(dto.getCreationDate());
-        entity.setUpdatedDate(dto.getUpdatedDate());
         entity.setTaxAmount(dto.getTaxAmount());
         entity.setTaxRate(dto.getTaxRate());
         entity.setTotalSellPrice(dto.getTotalSellPrice());

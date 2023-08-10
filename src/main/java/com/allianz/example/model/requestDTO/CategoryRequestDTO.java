@@ -13,6 +13,6 @@ public class CategoryRequestDTO extends BaseDTO {
 
     private String name;
 
-    private Set<ProductDTO> productList = new HashSet<>();
+   // private Set<ProductDTO> productList = new HashSet<>();
 
 }

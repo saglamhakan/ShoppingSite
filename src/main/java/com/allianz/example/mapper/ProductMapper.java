@@ -6,6 +6,7 @@ import com.allianz.example.model.requestDTO.PersonRequestDTO;
 import com.allianz.example.model.requestDTO.ProductRequestDTO;
 import com.allianz.example.util.IBaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -17,9 +18,11 @@ import java.util.stream.Collectors;
 public class ProductMapper implements IBaseMapper<ProductDTO, ProductEntity, ProductRequestDTO> {
 
     @Autowired
+    @Lazy
     TaxMapper taxMapper;
 
     @Autowired
+    @Lazy
     CategoryMapper categoryMapper;
 
     @Override
@@ -105,13 +108,10 @@ public class ProductMapper implements IBaseMapper<ProductDTO, ProductEntity, Pro
 
     public ProductEntity updateEntityFromRequestDTO(ProductEntity entity, ProductRequestDTO dto) {
 
-        entity.setId(dto.getId());
-        entity.setUuid(dto.getUuid());
+
         entity.setName(dto.getName());
         entity.setCode(dto.getCode());
         entity.setColor(dto.getColor());
-        entity.setCreationDate(dto.getCreationDate());
-        entity.setUpdatedDate(dto.getUpdatedDate());
         entity.setTax(dto.getTax());
         entity.setQuantity(dto.getQuantity());
         entity.setBuyPrice(dto.getBuyPrice());
@@ -132,4 +132,6 @@ public class ProductMapper implements IBaseMapper<ProductDTO, ProductEntity, Pro
                 .map(this::dtoToEntity)
                 .collect(Collectors.toSet());
     }
+
+
 }

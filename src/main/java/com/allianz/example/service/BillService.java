@@ -1,16 +1,12 @@
 package com.allianz.example.service;
 
-import com.allianz.example.database.entity.AddressEntity;
 import com.allianz.example.database.entity.BillEntity;
-import com.allianz.example.database.entity.PersonEntity;
 import com.allianz.example.database.repository.BillEntityRepository;
 import com.allianz.example.mapper.BillMapper;
-import com.allianz.example.model.AddressDTO;
 import com.allianz.example.model.BillDTO;
 import com.allianz.example.model.requestDTO.BillRequestDTO;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;

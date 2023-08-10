@@ -8,7 +8,6 @@ import com.allianz.example.mapper.AddressMapper;
 import com.allianz.example.model.AddressDTO;
 import com.allianz.example.model.BillDTO;
 import com.allianz.example.model.requestDTO.AddressRequestDTO;
-import com.allianz.example.model.requestDTO.BillRequestDTO;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,14 +57,14 @@ public class AddressService {
     }
     public AddressDTO getByUUID(UUID uuid) {
         Optional<AddressEntity> addressEntityOptional = addressEntityRepository.findByUuid(uuid);
-        if (addressEntityOptional.isPresent()) {
+        if (addressEntityOptional.isEmpty()) {
+            throw new BusinessException("UUID ile belirtilen Address bulunamadı!");
 
         } else {
+            return addressMapper.entityToDTO(addressEntityOptional.get());
 
         }
 
-        return null;
     }
-
 
 }

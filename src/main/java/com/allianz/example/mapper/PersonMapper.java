@@ -7,13 +7,17 @@ import com.allianz.example.util.BaseDTO;
 import com.allianz.example.util.IBaseMapper;
 import com.allianz.example.util.dbutil.BaseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class PersonMapper implements IBaseMapper<PersonDTO, PersonEntity, PersonRequestDTO> {
 
     @Autowired
+    @Lazy
     AddressMapper addressMapper;
 
     @Override
@@ -73,6 +77,17 @@ public class PersonMapper implements IBaseMapper<PersonDTO, PersonEntity, Person
     @Override
     public PersonEntity requestDTOToEntity(PersonRequestDTO dto) {
         PersonEntity personEntity = new PersonEntity();
+
+        personEntity.setName(dto.getName());
+        personEntity.setSurname(dto.getSurname());
+        personEntity.setTc(dto.getTc());
+        personEntity.setBirthYear(dto.getBirthYear());
+
+
+        return personEntity;
+    }
+
+    public PersonEntity updateEntityFromRequestDTO(PersonEntity personEntity, PersonRequestDTO dto) {
 
         personEntity.setName(dto.getName());
         personEntity.setSurname(dto.getSurname());

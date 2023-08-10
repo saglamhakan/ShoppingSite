@@ -1,15 +1,11 @@
 package com.allianz.example.service;
 
-import com.allianz.example.database.entity.SellerEntity;
 import com.allianz.example.database.entity.Settings;
 import com.allianz.example.database.repository.SettingsEntityRepository;
 import com.allianz.example.exception.BusinessException;
 import com.allianz.example.mapper.SettingsMapper;
-import com.allianz.example.model.SellerDTO;
 import com.allianz.example.model.SettingsDTO;
-import com.allianz.example.model.requestDTO.SellerRequestDTO;
 import com.allianz.example.model.requestDTO.SettingsRequestDTO;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

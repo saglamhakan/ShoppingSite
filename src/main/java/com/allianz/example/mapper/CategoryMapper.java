@@ -7,9 +7,11 @@ import com.allianz.example.model.ProductDTO;
 import com.allianz.example.model.requestDTO.CategoryRequestDTO;
 import com.allianz.example.util.IBaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -17,6 +19,7 @@ import java.util.stream.Collectors;
 @Component
 public class CategoryMapper implements IBaseMapper<CategoryDTO, CategoryEntity, CategoryRequestDTO> {
     @Autowired
+    @Lazy
     ProductMapper productMapper;
 
     @Override
@@ -27,8 +30,9 @@ public class CategoryMapper implements IBaseMapper<CategoryDTO, CategoryEntity, 
         categoryDTO.setName(entity.getName());
         categoryDTO.setCreationDate(entity.getCreationDate());
         categoryDTO.setUpdatedDate(entity.getUpdatedDate());
-        categoryDTO.setProductList(productMapper.entitiesToDTOs(entity.getProductList()));
-
+        Set<ProductDTO> productDTOS = new HashSet<>(productMapper
+                .entityListToDTOList(new ArrayList<>(entity.getProductList())));
+        categoryDTO.setProductList(productDTOS);
 
         return categoryDTO;
     }
@@ -40,9 +44,11 @@ public class CategoryMapper implements IBaseMapper<CategoryDTO, CategoryEntity, 
         entity.setId(dto.getId());
         entity.setUuid(dto.getUuid());
         entity.setName(dto.getName());
-        entity.setProductList(productMapper.dtosToEntities(dto.getProductList()));
         entity.setCreationDate(dto.getCreationDate());
         entity.setUpdatedDate(dto.getUpdatedDate());
+        Set<ProductEntity> productEntities = new HashSet<>(productMapper.
+                dtoListTOEntityList(new ArrayList<>(dto.getProductList())));
+        entity.setProductList(productEntities);
 
         return entity;
     }
@@ -77,7 +83,7 @@ public class CategoryMapper implements IBaseMapper<CategoryDTO, CategoryEntity, 
         entity.setId(dto.getId());
         entity.setUuid(dto.getUuid());
         entity.setName(dto.getName());
-        entity.setProductList(productMapper.dtosToEntities(dto.getProductList()));
+       // entity.setProductList(productMapper.dtosToEntities(dto.getProductList()));
         entity.setCreationDate(dto.getCreationDate());
         entity.setUpdatedDate(dto.getUpdatedDate());
 
@@ -85,12 +91,10 @@ public class CategoryMapper implements IBaseMapper<CategoryDTO, CategoryEntity, 
     }
 
     public CategoryEntity updateEntityFromRequestDTO(CategoryEntity entity, CategoryRequestDTO dto) {
-        entity.setId(dto.getId());
-        entity.setUuid(dto.getUuid());
+
         entity.setName(dto.getName());
-        entity.setProductList(productMapper.dtosToEntities(dto.getProductList()));
-        entity.setCreationDate(dto.getCreationDate());
-        entity.setUpdatedDate(dto.getUpdatedDate());
+       // entity.setProductList(productMapper.dtosToEntities(dto.getProductList()));
+
 
         return entity;
     }

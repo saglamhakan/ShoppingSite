@@ -1,15 +1,11 @@
 package com.allianz.example.service;
 
-import com.allianz.example.database.entity.CategoryEntity;
 import com.allianz.example.database.entity.CustomerEntity;
 import com.allianz.example.database.repository.CustomerEntityRepository;
 import com.allianz.example.exception.BusinessException;
 import com.allianz.example.mapper.CustomerMapper;
-import com.allianz.example.model.CategoryDTO;
 import com.allianz.example.model.CustomerDTO;
-import com.allianz.example.model.requestDTO.CategoryRequestDTO;
 import com.allianz.example.model.requestDTO.CustomerRequestDTO;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
